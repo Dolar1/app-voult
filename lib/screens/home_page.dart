@@ -38,7 +38,6 @@ class _HomePageState extends State<HomePage> {
                 await Provider.of<MasterPassword>(context, listen: false)
                     .validateMaster(_password.value.text.toString());
             if (istrue) {
-              _password.dispose();
               Navigator.of(context).pop();
               _showBottomSheet(webName);
             }
@@ -153,6 +152,13 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         );
+
+    @override
+    void dispose() {
+      _password.dispose();
+      super.dispose();
+    }
+
     return SafeArea(
       child: Scaffold(
         body: Padding(
